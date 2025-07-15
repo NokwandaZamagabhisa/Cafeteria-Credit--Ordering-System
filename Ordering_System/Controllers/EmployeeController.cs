@@ -15,7 +15,7 @@ namespace Ordering_System.Controllers
         public IActionResult Index()
         {
             List<Employee> employees;
-            employees = new List<Employee>();
+            employees = _context.Employees.ToList<Employee>();
             return View(employees);
         }
         [HttpGet]
