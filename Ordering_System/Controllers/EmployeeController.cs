@@ -18,6 +18,11 @@ namespace Ordering_System.Controllers
             employees = _context.Employees.ToList<Employee>();
             return View(employees);
         }
+        public IActionResult EmployeeDetails(int id)
+        {
+            Employee singleEmployee = _context.Employees.SingleOrDefault(x => x.Id == id);
+            return View(singleEmployee);
+        }
         [HttpGet]
         public IActionResult Create() {
             Employee employee = new Employee();
