@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Ordering_System.Data;
+using System.Net.WebSockets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,5 +30,18 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+app.UseWebSockets();  // Enables WebSocket support
+app.Use(async (context, next) =>
+{
+    if (context.WebSockets.IsWebSocketRequest)
+    {
+        WebSocket socket = await context.WebSockets.AcceptWebSocketAsync();
+        // Handle WebSocket connections here
+    }
+    else
+    {
+        await next();
+    }
+});
 
 app.Run();

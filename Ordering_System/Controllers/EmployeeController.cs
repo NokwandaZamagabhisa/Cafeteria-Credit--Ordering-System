@@ -18,5 +18,17 @@ namespace Ordering_System.Controllers
             employees = new List<Employee>();
             return View(employees);
         }
+        [HttpGet]
+        public IActionResult Create() {
+            Employee employee = new Employee();
+
+            return View(employee);
+        }
+        [HttpPost]
+        public IActionResult Create(Employee employee) {
+            _context.Add(employee);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
